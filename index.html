@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trajectory Tracking on 2DSFMR</title>
+    <!-- MathJax for LaTeX Formulas -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Arial", sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .main-title {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .author-info {
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .experiment-card, .intro-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 35px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+        }
+
+        .exp-title {
+            font-size: 22px;
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-weight: 600;
+            border-left: 4px solid #3498db;
+            padding-left: 12px;
+        }
+
+        .exp-desc, .intro-desc {
+            font-size: 15px;
+            color: #4a5568;
+            margin-bottom: 25px;
+            padding: 12px;
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            line-height: 1.8;
+        }
+
+        .video-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .video-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-subtitle {
+            font-size: 16px;
+            color: #34495e;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header & Author (Centered) -->
+        <div class="page-header">
+            <h1 class="main-title">Rapid Vibration Suppression and Trajectory Tracking of a Serial Manipulator with Multi-Flexible Links</h1>
+            <p class="author-info">The detailed control design procedures and analysis of experimental results are presented in the paper Rapid Vibration Suppression and Trajectory Tracking of a Serial Manipulator with Multi-Flexible Links.</p>
+        </div>
+
+        <div class="intro-card">
+            <p class="intro-desc">
+                This work performs vibration suppression and trajectory tracking experiments on a 2-DOF serial flexible manipulator with three predefined motion profiles defined in polar coordinates $(r_d, \varphi_d)$, where $r_d$ represents the tip polar radius reference and  $\varphi_d$ is the tip polar angle reference. <br>
+                Videos present the comparative experimental results between the proposed backstepping boundary control scheme and the conventional LQR + feedforward control strategy. 
+            </p>
+        </div>
+
+        <!-- Experiment 1 -->
+        <div class="experiment-card">
+            <h2 class="exp-title">Experiment 1: Square trajectory tracking</h2>
+            <p class="exp-desc">
+                $r_d= r_1+ r_2\mathrm{sgn}(\cos(0.4\pi t)), \varphi_d=\frac{35\pi}{180}\mathrm{sgn}(\sin(0.2\pi t))$, where $\mathrm{sgn}(\cdot)$ is the sign function.	
+            </p>
+            <div class="video-group">
+                <div class="video-item">
+                    <!-- controlsList="nodownload" -->
+                    <video controls controlsList="nodownload">
+                        <source src="./videos/link2square2_double.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experiment 2 -->
+        <div class="experiment-card">
+            <h2 class="exp-title">Experiment 2: Sawtooth trajectory tracking</h2>
+            <p class="exp-desc">
+                $r_d= r_1+ r_2(\lfloor 0.4t+0.5 \rfloor-0.4t), \varphi_d=\frac{35\pi}{180}(0.2t-\lfloor 0.2t+0.5 \rfloor)$, where $\lfloor \cdot \rfloor$ is the floor function.
+            </p>
+            <div class="video-group">
+                <div class="video-item">
+                    <video controls controlsList="nodownload">
+                        <source src="./videos/link2stw2_double.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experiment 3 -->
+        <div class="experiment-card">
+            <h2 class="exp-title">Experiment 3: Sinusoidal trajectory tracking</h2>
+            <p class="exp-desc">
+                $r_d= r_1+r_2\cos(1.2\pi t), \varphi_d=\frac{35\pi}{180}\sin(0.4\pi t)$<br>
+            </p>
+            <div class="video-group">
+                <div class="video-item">
+                    <video controls controlsList="nodownload">
+                        <source src="./videos/link2sin2_double.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <p class="author-info">If the video cannot play smoothly, please try switching your network or browser</p>
+            <p class="author-info">All content and videos are for academic research only. Unauthorized use, reproduction or distribution is prohibited</p>
+        </div>
+    </div>
+</body>
+</html>
